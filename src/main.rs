@@ -24,10 +24,15 @@ fn read_gb(filename: &str) -> Result<(), Box<dyn Error>> {
 
     buff.set_position(0x103); // move to cartridge header
     buff.set_position(0x134);
-    let title_data: &mut [u8] = &mut [0; 16];
-    buff.read(title_data)?;
-    let title = read_string(title_data)?;
+    let data: &mut [u8] = &mut [0; 16];
+    buff.read(data)?;
+    let title = read_string(data)?;
     println!("{}", title);
+
+    buff.set_position(0x144);
+    let data: &mut [u8] = &mut [0; 2];
+    buff.read(data)?;
+    println!("New Licensee Code: {:02x?}", data);
     Ok(())
 }
 
