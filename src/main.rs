@@ -35,7 +35,10 @@ fn read_gb(filename: &str) -> Result<(), Box<dyn Error>> {
     let data: &mut [u8] = &mut [0; 2];
     buff.read(data)?;
     println!("New Licensee Code: {:02x?}", data);
-    let machine = machine::Machine::new(buff);
+
+    let mut machine = machine::Machine::new(buff);
+    machine.run()?;
+
     Ok(())
 }
 
