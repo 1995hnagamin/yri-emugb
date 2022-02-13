@@ -38,7 +38,7 @@ fn read_gb(filename: &str) -> Result<(), Box<dyn Error>> {
 
 fn read_string(data: &[u8]) -> Result<&str, Utf8Error> {
     match data.iter().position(|&x| x == 0) {
-        Some(i) => { std::str::from_utf8(&data[..i]) }
-        None => { std::str::from_utf8(&data) }
+        Some(i) => std::str::from_utf8(&data[..i]),
+        None => std::str::from_utf8(&data),
     }
 }
